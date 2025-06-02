@@ -13,6 +13,9 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Uint8Array(8))
+  // var votes = new Uint8Array(8)
+
 
   const nextAncedote = () => {
     return (
@@ -20,11 +23,23 @@ const App = () => {
     )
   }
 
-  console.log('Outside',selected)
+  const vote = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+
+    setVotes(copy)
+  }
+  
   return (
     <div>
+      <h2>Ancedote of the day</h2>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={vote}>vote</button>
       <button onClick={nextAncedote}>next anecdote</button>
+      
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
     </div> 
   )
 }
