@@ -8,23 +8,36 @@ const Button = (props) => {
   )
 }
 
-const Display = (props) => {
+const StatisticLine = (props) => {
   return (
-    <p>{props.name} {'>>>'} {props.value}</p>
+      <tr>
+        <td>{props.name}</td>
+        <td>{props.value}</td>
+      </tr>
   )
 }
 
 const Statistics = ({good, neutral, bad}) => {
+  if ((good+neutral+bad) === 0){
+    return (
+      <p>No feedback given</p>
+    )
+  }
+
   return (
     <>
       <h1>statistics</h1>
-    
-      <Display name='Good' value={good} />
-      <Display name='Neutral' value={neutral} />
-      <Display name='Bad' value={bad} />
-      <Display name='Total # of feedbacks' value={good + neutral + bad} />
-      <Display name='Average' value={(good*1 + bad*-1)/(good+neutral+bad)}/>
-      <Display name='Positive' value={good/(good+neutral+bad)}/>
+
+      <table>
+        <tbody>
+        <StatisticLine name='Good' value={good} />
+        <StatisticLine name='Neutral' value={neutral} />
+        <StatisticLine name='Bad' value={bad} />
+        <StatisticLine name='Total # of feedbacks' value={good + neutral + bad} />
+        <StatisticLine name='Average' value={(good*1 + bad*-1)/(good+neutral+bad)}/>
+        <StatisticLine name='Positive' value={good/(good+neutral+bad)}/>
+        </tbody>
+      </table>
     </>
   )
 }
