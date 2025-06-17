@@ -1,63 +1,57 @@
-const Header = (prop) => {
+const Header = ({ name }) => <h1>{name}</h1>
+
+const Content = ({ parts }) => {
   return (
     <div>
-      <h1>{prop.course.name}</h1>
+      {parts.map((part) => (
+        <Part key={part.id} part={part} />
+      ))}
     </div>
   )
 }
 
-const Content = (prop) => {
+const Part = ({ part }) => (
+  <p>
+    {part.name} {part.exercises}
+  </p>
+)
+
+const Course = ({ course }) => {
   return (
     <div>
-      <Part name={prop.course.parts[0].name} exercise={prop.course.parts[0].exercises} />
-      <Part name={prop.course.parts[1].name} exercise={prop.course.parts[1].exercises} />
-      <Part name={prop.course.parts[2].name} exercise={prop.course.parts[2].exercises} />
+      <Header name={course.name} />
+      <Content parts={course.parts} />
     </div>
   )
 }
 
-const Total = (prop) => {
-
-  return (
-    <p>Number of exercises {prop.course.parts[0].exercises + prop.course.parts[1].exercises + prop.course.parts[2].exercises}</p>
-  )
-}
-
-const Part = (prop) => {
-  return (
-    <p>
-      {prop.name} {prop.exercise}
-    </p>
-  )
-}
+const Total = (props) => <p>Number of exercises {props.total}</p>
 
 const App = () => {
-
   const course = {
-    name: "Half Stack application development",
+    id: 1,
+    name: 'Half Stack application development',
     parts: [
       {
-        name: "Fundamentals of React",
-        exercises: 10
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
       },
       {
-        name: "Using props to pass data",
-        exercises: 7
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
       },
       {
-        name: "State of a component",
-        exercises: 14
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
       }
     ]
   }
 
-  return (
-    <>
-      <Header course={course}/>
-      <Content course={course} />
-      <Total course={course} />
-    </>
-  )
+  return <Course course={course} />
 }
 
 export default App
+
