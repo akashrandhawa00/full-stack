@@ -1,5 +1,5 @@
-const Person = ({ person }) => {
-  return <li>{person.name}</li>;
+const Personn = ({ prop }) => {
+  return <li>{prop.name}</li>;
 };
 
-export default Person;
+export default Personn;
